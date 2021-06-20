@@ -76,6 +76,20 @@
 
 
 <style>
+
+    @font-face {
+		font-family: "Neuzeit Gro Bol";
+		src: url("../NeuzeitGro-Bol.ttf");
+	}
+	@font-face {
+		font-family: "Neuzeit Gro Reg";
+		src: url("../NeuzeitGro-Reg.ttf");
+	}
+
+    * {
+        font-family: NeuzeitGro Bol
+    }
+
     .playerCard{
         position: absolute;
         height: 74px;
