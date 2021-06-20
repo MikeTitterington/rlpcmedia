@@ -538,12 +538,12 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     let countR = 0;
     for (var player in d['players']) {
       if (d['players'][player]['team'] == '0'){
-        d['players'][player]['topPos'] = 77 * countL + 0;
+        d['players'][player]['topPos'] = 76 * countL + 0;
         d['players'][player]['color'] = "#0cb8fc";
         countL += 1;
         left.push(d['players'][player]);
       } else {
-        d['players'][player]['topPos'] = 77 * countR + 0;
+        d['players'][player]['topPos'] = 76 * countR + 0;
         d['players'][player]['color'] = "#fc9c0c";
         countR += 1;
         right.push(d['players'][player]);
