@@ -139,11 +139,11 @@
 
 	@font-face {
 		font-family: "Neuzeit Gro Bol";
-		src: url("../assets/fonts/NeuzeitGro-Bol.ttf");
+		src: url("../NeuzeitGro-Bol.ttf");
 	}
 	@font-face {
 		font-family: "Neuzeit Gro Reg";
-		src: url("../assets/fonts/NeuzeitGro-Reg.ttf");
+		src: url("../NeuzeitGro-Reg.ttf");
 	}
 
 	.teammates.left {
