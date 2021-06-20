@@ -17,19 +17,19 @@
             <div class='t-text'>
                 {goals}
             </div>
-            <img src='../team_logos/goal.svg' alt='goal'>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/goal.svg' alt='goal'>
         </div>
         <div class='pAssist' style='{team}:110px;'>
             <div class='t-text'>
                 {assists}
             </div>
-            <img src='../team_logos/assist.svg' alt='assist'>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/assist.svg' alt='assist'>
         </div>
         <div class='pSave' style='{team}:40px;'>
             <div class='t-text'>
                 {saves}
             </div>
-            <img src='../team_logos/save.svg' alt='save'>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/save.svg' alt='save'>
         </div>
         <div class='pBoost'>
             <div class='t-text' style="left: 10px">
@@ -49,19 +49,19 @@
             <div class='t-text'>
                 {goals}
             </div>
-            <img src='../team_logos/goal.svg' alt='goal'>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/goal.svg' alt='goal'>
         </div>
         <div class='pAssist' style='{team}:110px;'>
             <div class='t-text'>
                 {assists}
             </div>
-            <img src='../team_logos/assist.svg' alt='assist'>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/assist.svg' alt='assist'>
         </div>
         <div class='pSave' style='{team}:180px;'>
             <div class='t-text'>
                 {saves}
             </div>
-            <img src='../team_logos/save.svg'  alt='save'>>
+            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/save.svg'  alt='save'>
         </div>
         <div class='pBoost'>
             <div class='t-text' style="right: 10px">
@@ -130,8 +130,12 @@
 
     .pGoal img {
         position: absolute;
-        top: 0px;
+        top: -6px;
         left: 20px;
+        height: 140%;
+        width: 140%;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
     }
         
 
@@ -149,8 +153,12 @@
 
     .pAssist img {
         position: absolute;
-        top: 0px;
+        top: -6px;
         left: 20px;
+        height: 140%;
+        width: 140%;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
     }
         
 
@@ -168,8 +176,12 @@
 
     .pSave img {
         position: absolute;
-        top: 0px;
+        top: -4px;
         left: 20px;
+        height: 120%;
+        width: 120%;
+        object-fit: contain;
+        filter: brightness(0) invert(1);
     }
 
     .flip {
