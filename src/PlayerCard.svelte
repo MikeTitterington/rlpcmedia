@@ -7,10 +7,18 @@
     export let team;
     export let boost;
     export let color;
+    import { textfit } from 'svelte-textfit';
+	import { fly } from 'svelte/transition';
+    
 </script>
 {#if team == "right"}
-    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;">
-        <div class='pName'>
+    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;" transition:fly="{{ x:200, duration: 2000 }}">
+        <div class='pName' use:textfit={
+            {
+              mode:"single", max:27,
+              forceSingleModeWidth:false
+            }
+          }>
             {name}
         </div>
         <div class='pGoal' style='{team}:180px;'>
@@ -41,8 +49,12 @@
         </div>
     </div>
 {:else}
-    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;">
-        <div class='pName'>
+    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;" transition:fly="{{ x:-200, duration: 2000 }}">
+        <div class='pName' use:textfit={
+            {
+              mode:"single", max:27,
+              forceSingleModeWidth:false
+            }}>
             {name}
         </div>
         <div class='pGoal' style='{team}:40px;'>
@@ -122,12 +134,11 @@
     .pName {
         position: absolute;
         color: white;
-        top: 5px;
         left: 19px;
         text-align: center;
         font-family: NeuzeitGro Bol;
-        font-size: 27px;
         width: 230px;
+        height: 37px;
     }
 
     .pGoal {
@@ -140,6 +151,7 @@
         z-index: 1;
         font-family: NeuzeitGro Bol;
         font-size: 30px;
+        width: 20px;
     }
 
     .pGoal img {

@@ -9,11 +9,21 @@ const blueTeamLogo = writable('');
 const orangeTeamLogo = writable('');
 const blueTeamRecord = writable('');
 const orangeTeamRecord = writable('');
-const blueTeamSeriesScore = writable('');
-const orangeTeamSeriesScore = writable('');
+const blueTeamSeriesScore = writable(0);
+const orangeTeamSeriesScore = writable(0);
 const league = writable('');
 const playersLeft = writable([]);
 const playersRight = writable([]);
+const playersFocus = writable({});
+const showPlayers = writable(false);
+const showGoal = writable(false);
+const goalSpeed = writable('');
+const goalScore = writable('');
+const goalTeam = writable('');
+const matchCreated = writable(false);
+const showSeries = writable(false);
+blueTeamSeriesScore.set(0);
+orangeTeamSeriesScore.set(0);
 
 let teamMap = {
     "ascension": {
@@ -495,6 +505,30 @@ let teamMap = {
     },
     "mages": {
       "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771077495772020751/Mages_Logo.png"
+    },
+    "turtles": {
+      "1": "#ff2e00",
+      "2": "#18020c",
+      "3": "#000001",
+      "logo": "https://cdn.discordapp.com/attachments/394574231066640387/715062285554548746/Turtles_logo.png"
+    },
+    "rams": {
+      "1": "#ff2e00",
+      "2": "#18020c",
+      "3": "#000001",
+      "logo": "https://cdn.discordapp.com/attachments/421796377303973888/758719416321441892/Rams_Logo_2.png"
+    },
+    "cowboys": {
+      "1": "#ff2e00",
+      "2": "#18020c",
+      "3": "#000001",
+      "logo": "https://cdn.discordapp.com/attachments/421796377303973888/758723087909781543/Cowboys_Logo_2.png"
+    },
+    "flowerhorns": {
+      "1": "#ff2e00",
+      "2": "#18020c",
+      "3": "#000001",
+      "logo": "https://cdn.discordapp.com/attachments/394574231066640387/715062260480999464/Flowerhorns_Logo.png"
     }
   };
 
@@ -516,6 +550,15 @@ WsSubscribers.init(49322, false, [
     "cb:heartbeat"
 ]);
 
+WsSubscribers.subscribe("game", "match_ended", (d) => {
+  matchCreated.set(false);
+  if(d['winner_team_num'] == 0){
+    blueTeamSeriesScore.update(n => n + 1);
+  } else {
+    orangeTeamSeriesScore.update(n => n + 1);
+  }
+});
+
 WsSubscribers.subscribe("game", "update_state", (d) => {
     var gameTime = d['game']['time'];
     clockTime.set(secondsToTime(gameTime, false));
@@ -525,6 +568,7 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     orangeTeamName.set(d['game']['teams']["1"]['name']);
     let leftLower = d['game']['teams']["0"]['name'].toLowerCase();
     let rightLower = d['game']['teams']["1"]['name'].toLowerCase();
+    
     if (teamMap.hasOwnProperty(leftLower)) {
         blueTeamLogo.set(teamMap[leftLower]['logo']);
     }
@@ -537,6 +581,9 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     let countL = 0;
     let countR = 0;
     for (var player in d['players']) {
+      if(d['game']['target'] == d['players'][player]['id']) {
+        playersFocus.set(d['players'][player]);
+      }
       if (d['players'][player]['team'] == '0'){
         d['players'][player]['topPos'] = 76 * countL + 0;
         d['players'][player]['color'] = "#0cb8fc";
@@ -553,50 +600,80 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     right = right.sort();
     playersLeft.set(left);
     playersRight.set(right);
+    if(d['game']['hasTarget'] && !d['game']['isReplay']){
+      showGoal.set(false);
+      showPlayers.set(true);
+    }else {
+      showPlayers.set(false);
+    }
 });
 
+
+WsSubscribers.subscribe("game", "post_countdown_begin", () => {
+  matchCreated.set(true);
+  setTimeout(function () {
+    showSeries.set(false);
+  }, 1500);
+});
+
+
 WsSubscribers.subscribe("game", "match_created", () => {
-    showNoTimeInClock = false;
-    blueTeamScore.set(d['game']['teams']["0"]['score']);
-    orangeTeamScore.set(d['game']['teams']["1"]['score']);
-    clockTime.set("5:00");
-    blueTeamName.set(d['game']['teams']["0"]['name']);
-    orangeTeamName.set(d['game']['teams']["1"]['name']);
+    matchCreated.set(true);
     var url = "https://spreadsheets.google.com/feeds/cells/1mDV2D9MRoYX-7f4eBDlllvBq-kewCFQ6kRbCf3ML6uk/od6/public/basic?alt=json";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var obj = JSON.parse(this.response);
             var entry = obj['feed']['entry'];
-            for (i = 0; i < entry.length; i++) {
+            for (let i = 0; i < entry.length; i++) {
                 if (obj['feed']['entry'][i]['title']['$t'] == "J6") {
-                    leftRecord = obj['feed']['entry'][i]['content']['$t'];
+                    let leftRecord = obj['feed']['entry'][i]['content']['$t'];
                     blueTeamRecord.set(leftRecord);
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "J7") {
-                    rightRecord = obj['feed']['entry'][i]['content']['$t'];
+                    let rightRecord = obj['feed']['entry'][i]['content']['$t'];
                     orangeTeamRecord.set(rightRecord);
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "K6") {
-                    leftColor = obj['feed']['entry'][i]['content']['$t'];
+                    let leftColor = obj['feed']['entry'][i]['content']['$t'];
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "K7") {
-                    rightColor = obj['feed']['entry'][i]['content']['$t'];
-                } else if (obj['feed']['entry'][i]['title']['$t'] == "G5") {
-                    league.set(obj['feed']['entry'][i]['content']['$t']);
-                } else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
-                    if (obj['feed']['entry'][i]['content']['$t'] > leftSeriesScore) {
-                        leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
-                        blueTeamSeriesScore.set(leftSeriesScore);
-                    }
-                } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
-                    if (obj['feed']['entry'][i]['content']['$t'] > rightSeriesScore) {
-                        rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
-                        orangeTeamSeriesScore.set(rightSeriesScore);
-                    }
+                    let rightColor = obj['feed']['entry'][i]['content']['$t'];
                 }
+                //  else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
+                //     if (obj['feed']['entry'][i]['content']['$t']) {
+                //         let leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
+                //         blueTeamSeriesScore.set(leftSeriesScore);
+                //     }
+                // } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
+                //     if (obj['feed']['entry'][i]['content']['$t']) {
+                //       let rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
+                //         orangeTeamSeriesScore.set(rightSeriesScore);
+                //     }
+                // }
             }
         }
     };
     xhttp.open("GET", url, true);
     xhttp.send();
+    showSeries.set(true);
+});
+
+WsSubscribers.subscribe("game", "goal_scored", (d) => {
+  goalScore.set(d['scorer']['name']);
+  goalSpeed.set(d['goalspeed'].toFixed(1));
+  if(d['scorer']['teamnum'] == 0) {
+    goalTeam.set("#0cb8fc");
+  } else {
+    goalTeam.set("#fc9c0c");
+  }
+});
+
+WsSubscribers.subscribe("game", "replay_start", () => {
+  showGoal.set(true);
+});
+
+WsSubscribers.subscribe("game", "replay_will_end", (d) => {
+  setTimeout(function () {
+    showGoal.set(false);
+  }, 1500);
 });
 
 export default {
@@ -613,5 +690,13 @@ export default {
     blueTeamSeriesScore: blueTeamSeriesScore.subscribe,
     orangeTeamSeriesScore: orangeTeamSeriesScore.subscribe,
     playersLeft: playersLeft.subscribe,
-    playersRight: playersRight.subscribe
+    playersRight: playersRight.subscribe,
+    playersFocus: playersFocus.subscribe,
+    showPlayers: showPlayers.subscribe,
+    showGoal: showGoal.subscribe,
+    goalSpeed: goalSpeed.subscribe,
+    goalScore: goalScore.subscribe,
+    matchCreated: matchCreated.subscribe,
+    goalTeam: goalTeam.subscribe,
+    showSeries: showSeries.subscribe
 }
