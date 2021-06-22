@@ -600,6 +600,10 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     right = right.sort();
     playersLeft.set(left);
     playersRight.set(right);
+    if(!d['game']['isReplay']){
+      showGoal.set(false);
+    }
+    
     if(d['game']['hasTarget'] && !d['game']['isReplay']){
       showGoal.set(false);
       showPlayers.set(true);
@@ -619,6 +623,7 @@ WsSubscribers.subscribe("game", "post_countdown_begin", () => {
 
 WsSubscribers.subscribe("game", "match_created", () => {
     matchCreated.set(true);
+    showGoal.set(false);
     var url = "https://spreadsheets.google.com/feeds/cells/1mDV2D9MRoYX-7f4eBDlllvBq-kewCFQ6kRbCf3ML6uk/od6/public/basic?alt=json";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -636,18 +641,19 @@ WsSubscribers.subscribe("game", "match_created", () => {
                     let leftColor = obj['feed']['entry'][i]['content']['$t'];
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "K7") {
                     let rightColor = obj['feed']['entry'][i]['content']['$t'];
+                } else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
+                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
+                      console.log('Update score');
+                      let leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
+                      blueTeamSeriesScore.set(leftSeriesScore);
+                    }
+                } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
+                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
+                      console.log('Update score');
+                      let rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
+                      orangeTeamSeriesScore.set(rightSeriesScore);
+                    }
                 }
-                //  else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
-                //     if (obj['feed']['entry'][i]['content']['$t']) {
-                //         let leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
-                //         blueTeamSeriesScore.set(leftSeriesScore);
-                //     }
-                // } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
-                //     if (obj['feed']['entry'][i]['content']['$t']) {
-                //       let rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
-                //         orangeTeamSeriesScore.set(rightSeriesScore);
-                //     }
-                // }
             }
         }
     };
