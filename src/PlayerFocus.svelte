@@ -36,7 +36,7 @@
         <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/save.svg' alt='save'>
     </div>
     <div class='pBoost'>
-        <div class='t-text' style="left: 10px">
+        <div class='t-text' style="right: 10px">
             {boost}
         </div>
         <div class='boostBar'>
