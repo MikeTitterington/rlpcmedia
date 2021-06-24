@@ -561,6 +561,11 @@ WsSubscribers.subscribe("game", "match_ended", (d) => {
   }
 });
 
+WsSubscribers.subscribe("game", "match_destroyed", (d) => {
+  matchCreated.set(true);
+  matchEnded.set(false);
+});
+
 WsSubscribers.subscribe("game", "update_state", (d) => {
     var gameTime = d['game']['time'];
     clockTime.set(secondsToTime(gameTime, false));
