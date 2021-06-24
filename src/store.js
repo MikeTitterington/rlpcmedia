@@ -620,6 +620,7 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     }else {
       showPlayers.set(false);
     }
+    
 });
 
 
@@ -674,6 +675,10 @@ WsSubscribers.subscribe("game", "match_created", () => {
 });
 
 WsSubscribers.subscribe("game", "goal_scored", (d) => {
+  setTimeout(function () {
+    showGoal.set(false);
+    document.getElementById("video-player").play();
+  }, 1500);
   goalScore.set(d['scorer']['name']);
   goalSpeed.set(d['goalspeed'].toFixed(1));
   if(d['scorer']['teamnum'] == 0) {
@@ -690,6 +695,7 @@ WsSubscribers.subscribe("game", "replay_start", () => {
 WsSubscribers.subscribe("game", "replay_will_end", (d) => {
   setTimeout(function () {
     showGoal.set(false);
+    document.getElementById("video-player").play();
   }, 1500);
 });
 

@@ -147,7 +147,7 @@
 			{#if showSeries}
 				<SeriesScene name={orangeTeamName} position="51%" color="#fc9c0c" team={"right"} logo={orangeTeamLogo} score={orangeTeamSeriesScore}/>
 			{/if}
-			<video id='video-player' class='video' autoplay muted>
+			<video id='video-player' class='video' muted>
 				<source src="./out.webm" type="video/webm">
 			</video>
 			{#if matchEnded}
@@ -165,6 +165,15 @@
 	@font-face {
 		font-family: "Neuzeit Gro Reg";
 		src: url("../NeuzeitGro-Reg.ttf");
+	}
+
+	#video-player {
+		position: absolute;
+		top: 0%;
+		left: 0%;
+		height: 1080px;
+		width: 1920px;
+		z-index: 2;
 	}
 
 	body {

@@ -54,9 +54,9 @@
         background:
             radial-gradient(black 15%, transparent 16%) 0 0,
             radial-gradient(black 15%, transparent 16%) 8px 8px,
-            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-            background-color:#282828;
+            radial-gradient(#23266b 15%, transparent 20%) 0 1px,
+            radial-gradient(#23266b 15%, transparent 20%) 8px 9px;
+            background-color:#23266b;
             background-size:16px 16px;
     }
 
