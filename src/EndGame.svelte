@@ -52,10 +52,12 @@
         top: 0%;
         left: 0%;
         background:
-            linear-gradient(135deg, #708090 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
-            linear-gradient(225deg, #708090 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
-            background-color:#708090;
-            background-size: 64px 128px;
+            radial-gradient(black 15%, transparent 16%) 0 0,
+            radial-gradient(black 15%, transparent 16%) 8px 8px,
+            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
+            radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
+            background-color:#282828;
+            background-size:16px 16px;
     }
 
     .teamL {
@@ -64,7 +66,7 @@
         background-color: #252122;
         left: 130px;
         position: absolute;
-        top: 16%;
+        top: 17%;
         color: white;
         box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
         border: 2px solid #0b8cc0;
@@ -73,10 +75,10 @@
         height: 400px;
         width: 1200px;
         background-color: #252122;
-        left: 490px;
+        right: 130px;
         color: white;
         position: absolute;
-        top: 56%;
+        top: 57%;
         box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
         border: 2px solid #fc9c0c;
     }
