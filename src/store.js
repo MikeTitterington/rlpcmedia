@@ -553,7 +553,10 @@ WsSubscribers.init(49322, false, [
 
 WsSubscribers.subscribe("game", "match_ended", (d) => {
   matchCreated.set(false);
-  matchEnded.set(true);
+  
+  setTimeout(function () {
+    matchEnded.set(true);
+  }, 7000);
   if(d['winner_team_num'] == 0){
     blueTeamSeriesScore.update(n => n + 1);
   } else {
