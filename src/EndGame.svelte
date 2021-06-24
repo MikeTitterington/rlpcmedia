@@ -13,7 +13,7 @@
     import { fade } from 'svelte/transition';
 </script>
 <div class='test' transition:fly="{{ duration: 2000 }}"></div>
-<div class="teamL" transition:fly="{{ x:-1000, duration: 2000, delay: 500}}">
+<div class="teamL" transition:fly="{{ x:-1000, duration: 1000, delay: 1000}}">
     <img class="teamLogo" src={ leftLogo } alt="teamLogo1"/>
     <div class="teamName" use:textfit={
         {
@@ -27,7 +27,7 @@
         <Player {...playerStats} top={75*playerStats.topPos/76 + 175} left={"left:30%;"}/>
     {/each}
 </div>
-<div class="teamR"  transition:fly="{{ x:1000, duration: 2000, delay: 1500 }}">
+<div class="teamR"  transition:fly="{{ x:1000, duration: 1000, delay: 1000 }}">
     <img class="teamLogo" src="{ rightLogo }" alt="teamLogo2"/>
     <div class="teamName" use:textfit={
         {
