@@ -21,6 +21,7 @@ const goalSpeed = writable('');
 const goalScore = writable('');
 const goalTeam = writable('');
 const matchCreated = writable(false);
+const matchEnded = writable(false);
 const showSeries = writable(false);
 blueTeamSeriesScore.set(0);
 orangeTeamSeriesScore.set(0);
@@ -552,6 +553,7 @@ WsSubscribers.init(49322, false, [
 
 WsSubscribers.subscribe("game", "match_ended", (d) => {
   matchCreated.set(false);
+  matchEnded.set(true);
   if(d['winner_team_num'] == 0){
     blueTeamSeriesScore.update(n => n + 1);
   } else {
@@ -624,6 +626,7 @@ WsSubscribers.subscribe("game", "post_countdown_begin", () => {
 WsSubscribers.subscribe("game", "match_created", () => {
     matchCreated.set(true);
     showGoal.set(false);
+    matchEnded.set(false);
     var url = "https://spreadsheets.google.com/feeds/cells/1mDV2D9MRoYX-7f4eBDlllvBq-kewCFQ6kRbCf3ML6uk/od6/public/basic?alt=json";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -703,6 +706,7 @@ export default {
     goalSpeed: goalSpeed.subscribe,
     goalScore: goalScore.subscribe,
     matchCreated: matchCreated.subscribe,
+    matchEnded: matchEnded.subscribe,
     goalTeam: goalTeam.subscribe,
     showSeries: showSeries.subscribe
 }

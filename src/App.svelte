@@ -6,6 +6,7 @@
 	import GoalScorer from './GoalScorer.svelte';
 	import ScoreBug from './ScoreBug.svelte';
 	import SeriesScene from './SeriesScene.svelte';
+	import Endgame from './EndGame.svelte';
     import { textfit } from 'svelte-textfit';
 	import { fly } from 'svelte/transition';
 
@@ -32,6 +33,7 @@
 	export let goalTeam;
 	export let matchCreated;
 	export let showSeries;
+	export let matchEnded;
 	let leftTop = 300;
 	let scorebugPackage = {
 		
@@ -75,6 +77,9 @@
 		})
 		store.matchCreated(currentMessage => {
 			matchCreated = currentMessage;
+		})
+		store.matchEnded(currentMessage => {
+			matchEnded = currentMessage;
 		})
 		store.playersLeft(currentMessage => {
 			if (currentMessage == ''){
@@ -145,6 +150,9 @@
 			<video id='video-player' class='video' autoplay muted>
 				<source src="./out.webm" type="video/webm">
 			</video>
+			{#if matchEnded}
+				<Endgame playersLeft={playersLeft} playersRight={playersRight} leftScore={blueTeamScore} leftLogo={blueTeamLogo} leftName={blueTeamName} rightName={orangeTeamName} rightLogo={orangeTeamLogo} rightScore={orangeTeamScore} />
+			{/if}
 		</div>
 	</body>
 </main>
