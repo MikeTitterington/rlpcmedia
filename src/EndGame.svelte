@@ -13,7 +13,7 @@
     import { fade } from 'svelte/transition';
 </script>
 <div class='test' transition:fly="{{ duration: 2000 }}"></div>
-<div class="teamL" transition:fly="{{ x:-200, duration: 2000 }}">
+<div class="teamL" transition:fly="{{ x:-1000, duration: 2000, delay: 500}}">
     <img class="teamLogo" src={ leftLogo } alt="teamLogo1"/>
     <div class="teamName" use:textfit={
         {
@@ -22,12 +22,12 @@
         }
       }>{ leftName }</div>
     <div class="teamScore">{ leftScore }</div>
-    <Player name="Name" goals="Goals" score="Score" assists="Assists" saves="Saves" demos="Demos" shots="Shots" top={100}/>
+    <Player name="Name" goals="Goals" score="Score" assists="Assists" saves="Saves" demos="Demos" shots="Shots" top={100} left={"left:30%;"}/>
     {#each playersLeft as playerStats (playerStats.id) }
-        <Player {...playerStats} top={75*playerStats.topPos/76 + 175}/>
+        <Player {...playerStats} top={75*playerStats.topPos/76 + 175} left={"left:30%;"}/>
     {/each}
 </div>
-<div class="teamR"  transition:fly="{{ x:200, duration: 2000 }}">
+<div class="teamR"  transition:fly="{{ x:1000, duration: 2000, delay: 1500 }}">
     <img class="teamLogo" src="{ rightLogo }" alt="teamLogo2"/>
     <div class="teamName" use:textfit={
         {
@@ -36,9 +36,9 @@
         }
       }>{ rightName }</div>
     <div class="teamScore">{ rightScore }</div>
-    <Player name="Name" goals="Goals" score="Score" assists="Assists" saves="Saves" demos="Demos" shots="Shots" top={100}/>
+    <Player name="Name" goals="Goals" score="Score" assists="Assists" saves="Saves" demos="Demos" shots="Shots" top={100} left={"left:0;"}/>
     {#each playersRight as playerStats (playerStats.id) }
-        <Player {...playerStats} top={75*playerStats.topPos/76 + 175}/>
+        <Player {...playerStats} top={75*playerStats.topPos/76 + 175} left={"left:0;"}/>
     {/each}
 </div>
 
@@ -82,7 +82,7 @@
         box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
         border: 2px solid #fc9c0c;
     }
-    .teamLogo {
+    .teamL .teamLogo {
         position: absolute;
         left: 0%;
         top: 0%;
@@ -91,7 +91,7 @@
         object-fit: contain;
     }
 
-    .teamName {
+    .teamL .teamName {
         position: absolute;
         top: 0;
         left: 30%;
@@ -101,10 +101,39 @@
         line-height: 100px;
     }
 
-    .teamScore {
+    .teamL .teamScore {
         position: absolute;
         top: 0;
         left: 90%;
+        text-align: center;
+        width: 10%;
+        height: 100px;
+        line-height: 100px;
+        font-size: 100px;
+    }
+    .teamR .teamLogo {
+        position: absolute;
+        right: 0%;
+        top: 0%;
+        width: 30%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .teamR .teamName {
+        position: absolute;
+        top: 0;
+        right: 30%;
+        text-align: center;
+        width: 60%;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .teamR .teamScore {
+        position: absolute;
+        top: 0;
+        right: 90%;
         text-align: center;
         width: 10%;
         height: 100px;

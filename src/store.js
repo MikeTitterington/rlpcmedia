@@ -21,7 +21,7 @@ const goalSpeed = writable('');
 const goalScore = writable('');
 const goalTeam = writable('');
 const matchCreated = writable(false);
-const matchEnded = writable(false);
+const matchEnded = writable(true);
 const showSeries = writable(false);
 blueTeamSeriesScore.set(0);
 orangeTeamSeriesScore.set(0);

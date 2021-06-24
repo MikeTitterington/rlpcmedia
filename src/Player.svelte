@@ -7,9 +7,10 @@
     export let shots;
     export let demos;
     export let top;
+    export let left;
 </script>
 
-<div class='player' style='top: { top }px'>
+<div class='player' style='top: { top }px; {left}'>
 
     <div class='playerName'>{ name }</div>
     <div class='playerScore'>{ score }</div>
@@ -25,7 +26,6 @@
         position: absolute;
         height: 75px;
         width: 70%;
-        left: 30%;
         line-height: 75px;
         text-align: center;
         color: white;
