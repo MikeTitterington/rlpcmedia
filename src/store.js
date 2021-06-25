@@ -578,7 +578,7 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     // Non Overtime less than a minute to display ms in RL time format
     if(d['game']['isOT'] == false && String(gameTime).includes(".") == true) {
                     
-      clockTime.set(secondsToTime(nonOTfull, true))
+      clockTime.set(secondsToTime(nonOTfull, false))
       //console.log("nonOTfull")
     } 
     // Overtime
