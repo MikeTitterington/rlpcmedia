@@ -25,6 +25,8 @@
 	export let scoreboardImage;
 	export let playersLeft = [];
 	export let playersRight = [];
+	export let playersLeftFull = [];
+	export let playersRightFull = [];
 	export let playersFocus = {};
 	export let showPlayers = false;
 	export let showGoal = false;
@@ -99,6 +101,20 @@
 				}
 			}
 		})
+		store.playersLeftFull(currentMessage => {
+			if (currentMessage == ''){
+				playersLeftFull = [];
+			}else {
+				playersLeftFull = currentMessage;
+			}
+		})
+		store.playersRightFull(currentMessage => {
+			if (currentMessage == ''){
+				playersRightFull = [];
+			}else {
+				playersRightFull = currentMessage;
+			}
+		})
 		store.playersFocus(currentMessage => {
 			playersFocus = currentMessage;
 		})
@@ -155,7 +171,7 @@
 				<source src="./out.webm" type="video/webm">
 			</video>
 			{#if matchEnded}
-				<Endgame playersLeft={playersLeft} playersRight={playersRight} leftScore={blueTeamScore} leftLogo={blueTeamLogo} leftName={blueTeamName} rightName={orangeTeamName} rightLogo={orangeTeamLogo} rightScore={orangeTeamScore} />
+				<Endgame playersLeft={playersLeftFull} playersRight={playersRightFull} leftScore={blueTeamScore} leftLogo={blueTeamLogo} leftName={blueTeamName} rightName={orangeTeamName} rightLogo={orangeTeamLogo} rightScore={orangeTeamScore} />
 			{/if}
 		</div>
 	</body>

@@ -594,26 +594,30 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     let countL = 0;
     let countR = 0;
     for (var player in d['players']) {
-      if (gameTime != 0 && Object.keys(d['players']).length == 6){
-        if(d['game']['target'] == d['players'][player]['id']) {
-          playersFocus.set(d['players'][player]);
-        }
-        if (d['players'][player]['team'] == '0'){
-          d['players'][player]['topPos'] = 76 * countL + 0;
-          d['players'][player]['color'] = "#0cb8fc";
-          countL += 1;
-          left.push(d['players'][player]);
-        } else {
-          d['players'][player]['topPos'] = 76 * countR + 0;
-          d['players'][player]['color'] = "#fc9c0c";
-          countR += 1;
-          right.push(d['players'][player]);
-        }
-        left = left.sort();
-        right = right.sort();
-        playersLeft.set(left);
-        playersRight.set(right);
+      if(d['game']['target'] == d['players'][player]['id']) {
+        playersFocus.set(d['players'][player]);
       }
+      if (d['players'][player]['team'] == '0'){
+        d['players'][player]['topPos'] = 76 * countL + 0;
+        d['players'][player]['color'] = "#0cb8fc";
+        countL += 1;
+        left.push(d['players'][player]);
+      } else {
+        d['players'][player]['topPos'] = 76 * countR + 0;
+        d['players'][player]['color'] = "#fc9c0c";
+        countR += 1;
+        right.push(d['players'][player]);
+      }
+    }
+    
+    left = left.sort();
+    right = right.sort();
+    playersLeft.set(left);
+    playersRight.set(right);
+
+    if (Object.keys(d['players']).length == 6) {
+      playersLeftFull.set(left);
+      playersRightFull.set(right);
     }
     
     if(!d['game']['isReplay']){
@@ -717,6 +721,8 @@ export default {
     orangeTeamSeriesScore: orangeTeamSeriesScore.subscribe,
     playersLeft: playersLeft.subscribe,
     playersRight: playersRight.subscribe,
+    playersLeftFull: playersLeftFull.subscribe,
+    playersRightFull: playersRightFull.subscribe,
     playersFocus: playersFocus.subscribe,
     showPlayers: showPlayers.subscribe,
     showGoal: showGoal.subscribe,
