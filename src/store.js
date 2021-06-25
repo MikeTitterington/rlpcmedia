@@ -567,6 +567,7 @@ WsSubscribers.subscribe("game", "match_ended", (d) => {
 WsSubscribers.subscribe("game", "match_destroyed", (d) => {
   matchCreated.set(true);
   matchEnded.set(false);
+  showSeries.set(true);
 });
 
 WsSubscribers.subscribe("game", "update_state", (d) => {
@@ -626,9 +627,7 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
 
 WsSubscribers.subscribe("game", "post_countdown_begin", () => {
   matchCreated.set(true);
-  setTimeout(function () {
-    showSeries.set(false);
-  }, 1500);
+  showSeries.set(false);
 });
 
 
@@ -654,13 +653,13 @@ WsSubscribers.subscribe("game", "match_created", () => {
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "K7") {
                     let rightColor = obj['feed']['entry'][i]['content']['$t'];
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
-                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
+                    if (obj['feed']['entry'][i]['content']['$t']) {
                       console.log('Update score');
                       let leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
                       blueTeamSeriesScore.set(leftSeriesScore);
                     }
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
-                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
+                    if (obj['feed']['entry'][i]['content']['$t']) {
                       console.log('Update score');
                       let rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
                       orangeTeamSeriesScore.set(rightSeriesScore);
@@ -671,7 +670,6 @@ WsSubscribers.subscribe("game", "match_created", () => {
     };
     xhttp.open("GET", url, true);
     xhttp.send();
-    showSeries.set(true);
 });
 
 WsSubscribers.subscribe("game", "goal_scored", (d) => {
