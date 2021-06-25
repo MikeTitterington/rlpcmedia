@@ -574,7 +574,18 @@ WsSubscribers.subscribe("game", "match_destroyed", (d) => {
 
 WsSubscribers.subscribe("game", "update_state", (d) => {
     var gameTime = d['game']['time'];
-    clockTime.set(secondsToTime(gameTime, false));
+    var nonOTfull = Math.ceil(gameTime)
+    // Non Overtime less than a minute to display ms in RL time format
+    if(d['game']['isOT'] == false && String(gameTime).includes(".") == true) {
+                    
+      clockTime.set(secondsToTime(nonOTfull, true))
+      //console.log("nonOTfull")
+    } 
+    // Overtime
+    else if (d['game']['isOT'] == true && String(gameTime).includes(".") == true) {
+      clockTime.set("+" + secondsToTime(nonOTfull, false))
+        //console.log("OT")
+    }
     blueTeamScore.set(d['game']['teams']["0"]['score']);
     orangeTeamScore.set(d['game']['teams']["1"]['score']);
     blueTeamName.set(d['game']['teams']["0"]['name']);
