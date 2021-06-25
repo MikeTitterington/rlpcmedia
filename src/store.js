@@ -609,12 +609,13 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
           countR += 1;
           right.push(d['players'][player]);
         }
+        left = left.sort();
+        right = right.sort();
+        playersLeft.set(left);
+        playersRight.set(right);
       }
     }
-    left = left.sort();
-    right = right.sort();
-    playersLeft.set(left);
-    playersRight.set(right);
+    
     if(!d['game']['isReplay']){
       showGoal.set(false);
     }
