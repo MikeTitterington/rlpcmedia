@@ -85,14 +85,18 @@
 			if (currentMessage == ''){
 				playersLeft = [];
 			}else {
-				playersLeft = currentMessage;
+				if (!matchCreated) {
+					playersLeft = currentMessage;
+				}
 			}
 		})
 		store.playersRight(currentMessage => {
 			if (currentMessage == ''){
 				playersRight = [];
 			}else {
-				playersRight = currentMessage;
+				if (!matchCreated) {
+					playersRight = currentMessage;
+				}
 			}
 		})
 		store.playersFocus(currentMessage => {
