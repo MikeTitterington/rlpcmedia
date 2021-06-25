@@ -14,6 +14,8 @@ const orangeTeamSeriesScore = writable(0);
 const league = writable('');
 const playersLeft = writable([]);
 const playersRight = writable([]);
+const playersLeftFull = writable([]);
+const playersRightFull = writable([]);
 const playersFocus = writable({});
 const showPlayers = writable(false);
 const showGoal = writable(false);
@@ -592,19 +594,21 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     let countL = 0;
     let countR = 0;
     for (var player in d['players']) {
-      if(d['game']['target'] == d['players'][player]['id']) {
-        playersFocus.set(d['players'][player]);
-      }
-      if (d['players'][player]['team'] == '0'){
-        d['players'][player]['topPos'] = 76 * countL + 0;
-        d['players'][player]['color'] = "#0cb8fc";
-        countL += 1;
-        left.push(d['players'][player]);
-      } else {
-        d['players'][player]['topPos'] = 76 * countR + 0;
-        d['players'][player]['color'] = "#fc9c0c";
-        countR += 1;
-        right.push(d['players'][player]);
+      if (gameTime != 0 && Object.keys(d['players']).length == 6){
+        if(d['game']['target'] == d['players'][player]['id']) {
+          playersFocus.set(d['players'][player]);
+        }
+        if (d['players'][player]['team'] == '0'){
+          d['players'][player]['topPos'] = 76 * countL + 0;
+          d['players'][player]['color'] = "#0cb8fc";
+          countL += 1;
+          left.push(d['players'][player]);
+        } else {
+          d['players'][player]['topPos'] = 76 * countR + 0;
+          d['players'][player]['color'] = "#fc9c0c";
+          countR += 1;
+          right.push(d['players'][player]);
+        }
       }
     }
     left = left.sort();
