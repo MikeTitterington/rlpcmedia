@@ -653,13 +653,13 @@ WsSubscribers.subscribe("game", "match_created", () => {
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "K7") {
                     let rightColor = obj['feed']['entry'][i]['content']['$t'];
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "C29") {
-                    if (obj['feed']['entry'][i]['content']['$t']) {
+                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
                       console.log('Update score');
                       let leftSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
                       blueTeamSeriesScore.set(leftSeriesScore);
                     }
                 } else if (obj['feed']['entry'][i]['title']['$t'] == "C30") {
-                    if (obj['feed']['entry'][i]['content']['$t']) {
+                    if (obj['feed']['entry'][i]['content']['$t'] != '0') {
                       console.log('Update score');
                       let rightSeriesScore = parseInt(obj['feed']['entry'][i]['content']['$t']);
                       orangeTeamSeriesScore.set(rightSeriesScore);
