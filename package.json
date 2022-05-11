@@ -21,6 +21,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "sirv-cli": "^1.0.0",
-    "@macfja/svelte-persistent-store": "^1.2.0",
+    "@macfja/svelte-persistent-store": "^1.2.0"
   }
 }
