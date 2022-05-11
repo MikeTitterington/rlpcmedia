@@ -1,12 +1,13 @@
 import { writable } from 'svelte/store'
+import { persist, cookieStorage } from '@macfja/svelte-persistent-store';
 import WsSubscribers from '../scripts/ws_subscriber.js';
-const clockTime = writable('');
-const blueTeamScore = writable('');
-const orangeTeamScore = writable('');
-const blueTeamName = writable('');
-const orangeTeamName = writable('');
-const blueTeamLogo = writable('');
-const orangeTeamLogo = writable('');
+const clockTime = writable('5:00');
+const blueTeamScore = writable('0');
+const orangeTeamScore = writable('0');
+const blueTeamName = persist(writable('BLUE'), cookieStorage(), 'blueTeamName');
+const orangeTeamName = persist(writable('ORANGE'), cookieStorage(), 'orangeTeamName');
+const blueTeamLogo = persist(writable('https://cdn.discordapp.com/attachments/402228472744902656/410550548748697610/RLPC_Logo.png'), cookieStorage(), 'blueTeamLogo');
+const orangeTeamLogo = persist(writable('https://cdn.discordapp.com/attachments/402228472744902656/410550548748697610/RLPC_Logo.png'), cookieStorage(), 'orangeTeamLogo');
 const blueTeamRecord = writable('');
 const orangeTeamRecord = writable('');
 const blueTeamSeriesScore = writable(0);
@@ -413,6 +414,9 @@ let teamMap = {
       "3": "#000001",
       "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771056608150290462/Wranglers_Logo.png"
     },
+    "the snowmen": {
+      "logo": "https://cdn.discordapp.com/attachments/755840403080478832/894604384216969246/The_Snowmen_Logo.png"
+    },
     "admirals": {
       "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771058776466784286/Admirals_Logo.png"
     },
@@ -555,6 +559,7 @@ WsSubscribers.init(49322, false, [
 
 WsSubscribers.subscribe("game", "match_ended", (d) => {
   matchCreated.set(false);
+  clockTime.set("0:00");
   
   setTimeout(function () {
     matchEnded.set(true);
@@ -564,6 +569,11 @@ WsSubscribers.subscribe("game", "match_ended", (d) => {
   } else {
     orangeTeamSeriesScore.update(n => n + 1);
   }
+});
+
+WsSubscribers.subscribe("sos", "scorebug_teams_update", (d) => {
+    blueTeamSeriesScore.set(parseInt(d['teams']['left']['score']));
+    orangeTeamSeriesScore.set(parseInt(d['teams']['right']['score']));
 });
 
 WsSubscribers.subscribe("game", "match_destroyed", (d) => {
@@ -595,10 +605,14 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
     
     if (teamMap.hasOwnProperty(leftLower)) {
         blueTeamLogo.set(teamMap[leftLower]['logo']);
+    } else {
+      blueTeamLogo.set('https://cdn.discordapp.com/attachments/402228472744902656/410550548748697610/RLPC_Logo.png');
     }
 
     if (teamMap.hasOwnProperty(rightLower)) {
         orangeTeamLogo.set(teamMap[rightLower]['logo']);
+    } else {
+      orangeTeamLogo.set('https://cdn.discordapp.com/attachments/402228472744902656/410550548748697610/RLPC_Logo.png');
     }
     let left = [];
     let right = [];
@@ -648,6 +662,7 @@ WsSubscribers.subscribe("game", "update_state", (d) => {
 WsSubscribers.subscribe("game", "post_countdown_begin", () => {
   matchCreated.set(true);
   showSeries.set(false);
+  clockTime.set("5:00");
 });
 
 
@@ -655,6 +670,7 @@ WsSubscribers.subscribe("game", "match_created", () => {
     matchCreated.set(true);
     showGoal.set(false);
     matchEnded.set(false);
+    clockTime.set("5:00");
     var url = "https://spreadsheets.google.com/feeds/cells/1mDV2D9MRoYX-7f4eBDlllvBq-kewCFQ6kRbCf3ML6uk/od6/public/basic?alt=json";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

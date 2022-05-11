@@ -1,6 +1,5 @@
 <script>
     export let clockTime;
-	export let league;
 	export let blueTeamName;
 	export let orangeTeamName;
 	export let blueTeamRecord;
@@ -11,47 +10,61 @@
 	export let orangeTeamLogo;
 	export let blueTeamSeriesScore;
 	export let orangeTeamSeriesScore;
-	export let scoreboardImage;
     import { textfit } from 'svelte-textfit';
 	import { fly } from 'svelte/transition';
     
 </script>
 
-<div class='scoreboard-image'>
-    <img src="{scoreboardImage}" alt='scoreboard' />
-</div>
-<div class="scorebug">
-    <div class='extensions'>
-        <div class='eLeft'></div>
-        <div class='eRight'></div>
-    </div>
+
+<div class="scorebug"  transition:fly="{{ y:-200, duration: 1000 }}">
+	<div class='scoreboard-image'>
+		<img src="https://media.discordapp.net/attachments/827545087604162663/930824469390430228/Scoreboard.png?width=1920&height=1080" alt='scoreboard' />
+	</div>
     <div class="main-scorebug-wrapper">
         <div class="team left">
             <div class="score">{blueTeamScore}</div>
             <div class="logo left">
                 <img class='left' src='{blueTeamLogo}' alt='blue-team-logo'>
             </div>
-            <div class="t-text left" use:textfit={
-                {
-                  mode:"single", max:40,
-                  forceSingleModeWidth:false
-                }
-              }>{blueTeamName}</div>
+			{#if blueTeamName == 'YELLOW JACKETS' || blueTeamName == 'TIDES(FT. TRAIL)' || blueTeamName == 'The Snowmen'}
+				<div class="t-text left" use:textfit={
+					{
+					mode:"single", max:30,
+					forceSingleModeWidth:false
+					}
+				}>{blueTeamName}</div>
+			{:else}
+				<div class="t-text left" use:textfit={
+					{
+					mode:"single", max:40,
+					forceSingleModeWidth:false
+					}
+				}>{blueTeamName}</div>
+			{/if}
             <div class="tickerv-wrap left">{blueTeamRecord}</div>
         </div>
         <div class="clock">{clockTime}</div>
-        <div class="league">{blueTeamSeriesScore}-{orangeTeamSeriesScore}</div>
+        <div class="league">Series Score: {blueTeamSeriesScore}-{orangeTeamSeriesScore}</div>
         <div class='seriesScoreL'></div>
         <div class='seriesScoreR'></div>
         <div class="team right">
             <div class="name-tile right">
                 <div class="bg right"></div>
-                <div class="t-text right" use:textfit={
-                    {
-                      mode:"single", width:265, height:63, max:40,
-                      forceSingleModeWidth:false
-                    }
-                  }>{orangeTeamName}</div>
+                {#if orangeTeamName == 'YELLOW JACKETS' || orangeTeamName == 'TIDES(FT. TRAIL)' || orangeTeamName == 'The Snowmen'}
+					<div class="t-text right" use:textfit={
+						{
+						mode:"single", max:30,
+						forceSingleModeWidth:false
+						}
+					}>{orangeTeamName}</div>
+				{:else}
+					<div class="t-text right" use:textfit={
+						{
+						mode:"single", max:40,
+						forceSingleModeWidth:false
+						}
+					}>{orangeTeamName}</div>
+				{/if}
                 <div class="tickerv-wrap right">{orangeTeamRecord}</div>
             </div>
             <div class="logo right">
@@ -75,51 +88,30 @@
     	font-family: Neuzeit Gro Bol;
 	}
 
-	.eLeft {
-		position: absolute;
-		height: 62px;
-		width: 130px;
-		background-color: #252122;
-		top: 0%;
-		left: 400px;
-		z-index: -1;
-		border: 2px solid #0cb8fc;
-	}
-
-	.eRight {
-		position: absolute;
-		height: 62px;
-		width: 130px;
-		background-color: #252122;
-		top: 0%;
-		right: 400px;
-		z-index: -1;
-		border: 2px solid #fc9c0c;
-	}
-
 	.clock {
 		position: absolute;
-		left: 419px;
-		top: 0%;
+		left: 413px;
+		top: 55px;
 		font-size: 57px;
 		color: white;
 		width: 174px;
 		height: 57px;
 		line-height: 57px;
 		text-align: center;
-    	font-family: Neuzeit Gro Reg;
+    	font-family: Neuzeit Gro Bol;
 	}
 
 	.league {
 		position: absolute;
-		left: 482px;
-		top: 53px;
-		font-size: 20px;
-		color: black;
-		width: 45px;
+		left: 260px;
+		top: -10px;
+		font-size: 35px;
+		color: white;
+		width: 500px;
 		height: 57px;
 		line-height: 57px;
 		text-align: center;
+    	font-family: Neuzeit Gro Reg;
 	}
 
 	.team {
@@ -137,12 +129,12 @@
 
 	.team.left .t-text {
 		position: absolute;
-		width: 265px;
-		top: 0%;
-		left: 65px;
+		width: 240px;
+		top: 44px;
+		left: 80px;
 		text-align: center;
-		height: 63px;
-		line-height: 63px;
+		height: 88px;
+		line-height: 88px;
 	}
 
 	.team.left .tickerv-wrap {
@@ -158,8 +150,8 @@
 
 	.team.left .score {
 		position: absolute;
-		right: 0%;
-		top: 0%;
+		right: 10px;
+		top: 55px;
         font-size: 60px;
 		height: 65px;
 		line-height: 65px;
@@ -174,12 +166,12 @@
 
 	.team.right .t-text {
 		position: absolute;
-		width: 265px;
-		top: 0%;
-		right: 65px;
+		width: 240px;
+		top: 44px;
 		text-align: center;
-		height: 63px;
-		line-height: 63px;
+		height: 88px;
+		line-height: 88px;
+		right: 90px;
 	}
 
 	.team.right .tickerv-wrap {
@@ -196,7 +188,7 @@
 	.team.right .score {
 		position: absolute;
 		left: 0%;
-		top: 0%;
+		top: 55px;
 		font-size: 60px;
 		height: 65px;
 		line-height: 65px;
@@ -206,22 +198,22 @@
 
 	.team img {
 		opacity: 1;
-		height: 62px;
-		width: 60px;
+		height: 99px;
+		width: 99px;
 		object-fit: contain;
 		position: absolute;
 	}
 
 	.team.left img{
 		position: absolute;
-		left: -58px;
-		top: 2px;
+		left: -19px;
+		top:34px;
 	}
 
 	.team.right img{
 		position: absolute;
-		right: -47px;
-		top: 2px;
+		right: -10px;
+		top: 34px;
 	}
 
 </style>

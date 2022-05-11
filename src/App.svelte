@@ -142,19 +142,19 @@
 			{#if matchCreated}
 				<div class="teammates left">
 					{#each playersLeft as player (player.id)}
-						<PlayerCard name={player.name} goals={player.goals} assists={player.assists} saves={player.saves} topPos={player.topPos + "px"} team={"left"} boost={player.boost} color={player.color}/>
+						<PlayerCard name={player.name} topPos={player.topPos} team={"left"} boost={player.boost} color={player.color}/>
 					{/each}
 				</div>
 				<div class="teammates right">
 					{#each playersRight as player (player.id)}
-						<PlayerCard name={player.name} goals={player.goals} assists={player.assists} saves={player.saves} topPos={player.topPos + "px"} team={"right"} boost={player.boost} color={player.color}/>
+						<PlayerCard name={player.name} topPos={player.topPos} team={"right"} boost={player.boost} color={player.color}/>
 					{/each}
 				</div>
 				{#if showPlayers}
-					<PlayerFocus name={playersFocus.name} goals={playersFocus.goals} assists={playersFocus.assists} saves={playersFocus.saves} boost={playersFocus.boost} color={playersFocus.color} />
+					<PlayerFocus name={playersFocus.name} boost={playersFocus.boost} color={playersFocus.color} />
 				{/if}
 				{#if showGoal}
-					<GoalScorer name={goalScore} speed={goalSpeed} color={goalTeam} />
+					<GoalScorer name={goalScore} color={goalTeam} />
 				{/if}
 			{/if}
 			{#if showSeries}

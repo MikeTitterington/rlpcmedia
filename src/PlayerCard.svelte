@@ -1,8 +1,5 @@
 <script>
     export let name;
-    export let goals;
-    export let assists;
-    export let saves;
     export let topPos;
     export let team;
     export let boost;
@@ -12,78 +9,108 @@
     
 </script>
 {#if team == "right"}
-    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;" transition:fly="{{ x:200, duration: 2000 }}">
-        <div class='pName' use:textfit={
-            {
-              mode:"single", max:27,
-              forceSingleModeWidth:false
-            }
-          }>
-            {name}
-        </div>
-        <div class='pGoal' style='{team}:180px;'>
-            <div class='t-text'>
-                {goals}
+    {#if topPos == "0"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824468367044608/Orange_Name_1.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:200, duration: 2000 }}">
+        <div class='playerCard' style="top:8px; {team}:0px;" transition:fly="{{ x:200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }
+            }>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
             </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/goal.svg' alt='goal'>
-        </div>
-        <div class='pAssist' style='{team}:110px;'>
-            <div class='t-text'>
-                {assists}
-            </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/assist.svg' alt='assist'>
-        </div>
-        <div class='pSave' style='{team}:40px;'>
-            <div class='t-text'>
-                {saves}
-            </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/save.svg' alt='save'>
-        </div>
-        <div class='pBoost'>
-            <div class='t-text' style="left: 10px">
-                {boost}
-            </div>
-            <div class='boostBar flip'>
-                <div class='boostFill' style='width:{boost}%; background-color: {color};'></div>
+            <div class='pBoost'>
+                <div class='boostBar flip'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
             </div>
         </div>
-    </div>
+    {:else if topPos == "76"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824468849377300/Orange_Name_2.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:200, duration: 2000 }}">
+        <div class='playerCard' style="top:58px; {team}:0px;" transition:fly="{{ x:200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }
+            }>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
+            </div>
+            <div class='pBoost'>
+                <div class='boostBar flip'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
+            </div>
+        </div>
+    {:else if topPos == "152"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824469080055888/Orange_Name_3.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:200, duration: 2000 }}">
+        <div class='playerCard' style="top:108px; {team}:0px;" transition:fly="{{ x:200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }
+            }>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
+            </div>
+            <div class='pBoost'>
+                <div class='boostBar flip'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
+            </div>
+        </div>
+    {/if}
 {:else}
-    <div class='playerCard' style="top:{topPos}; {team}:10px; border: {color} 2px solid;" transition:fly="{{ x:-200, duration: 2000 }}">
-        <div class='pName' use:textfit={
-            {
-              mode:"single", max:27,
-              forceSingleModeWidth:false
-            }}>
-            {name}
-        </div>
-        <div class='pGoal' style='{team}:40px;'>
-            <div class='t-text'>
-                {goals}
+    {#if topPos == "0"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824469675638834/Blue_Name_1.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:-200, duration: 2000 }}">
+        <div class='playerCard' style="top:8px; {team}:0px; " transition:fly="{{ x:-200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }}>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
             </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/goal.svg' alt='goal'>
-        </div>
-        <div class='pAssist' style='{team}:110px;'>
-            <div class='t-text'>
-                {assists}
-            </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/assist.svg' alt='assist'>
-        </div>
-        <div class='pSave' style='{team}:180px;'>
-            <div class='t-text'>
-                {saves}
-            </div>
-            <img src='https://rlpcmedia.s3.amazonaws.com/team_logos/save.svg'  alt='save'>
-        </div>
-        <div class='pBoost'>
-            <div class='t-text' style="right: 10px">
-                {boost}
-            </div>
-            <div class='boostBar'>
-                <div class='boostFill' style='width:{boost}%; background-color: {color};'></div>
+            <div class='pBoost'>
+                <div class='boostBar'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
             </div>
         </div>
-    </div>
+    {:else if topPos == "76"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824467591069716/Blue_Name_2.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:-200, duration: 2000 }}">
+        <div class='playerCard' style="top:58px; {team}:0px; " transition:fly="{{ x:-200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }}>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
+            </div>
+            <div class='pBoost'>
+                <div class='boostBar'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
+            </div>
+        </div>
+    {:else if topPos == "152"}
+        <img src='https://media.discordapp.net/attachments/827545087604162663/930824467846946926/Blue_Name_3.png?width=1920&height=1080' alt='b name 2' transition:fly="{{ x:-200, duration: 2000 }}">
+        <div class='playerCard' style="top:108px; {team}:0px; " transition:fly="{{ x:-200, duration: 2000 }}">
+            <div class='pName' use:textfit={
+                {
+                mode:"single", max:24,
+                forceSingleModeWidth:false
+                }}>
+                {name.toUpperCase().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '')}
+            </div>
+            <div class='pBoost'>
+                <div class='boostBar'>
+                    <div class='boostFill' style='width:{boost}%; background-color: {color}; border-radius: 25px;'></div>
+                </div>
+            </div>
+        </div>
+    {/if}
 {/if}
 
 
@@ -99,31 +126,28 @@
 	}
 
     * {
-        font-family: NeuzeitGro Bol
+        font-family: Neuzeit Gro Bol
     }
 
     .playerCard{
         position: absolute;
-        height: 74px;
-        width: 300px;
-        background-color: #252122;
+        height: 31px;
+        width: 280px;
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 
     .boostBar {
         position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        height: 10%;
-    }
-
-    .pBoost .t-text{
-        position: absolute;
-        bottom: 0%;
-        text-align: center;
-        font-family: NeuzeitGro Bol;
-        font-size: 27px;
-        color: white;
+        top: 24.35px;
+        left: 0px;
+        width: 262px;
+        height: 7px;
+        left:10px;
     }
 
     .boostFill {
@@ -136,78 +160,10 @@
         color: white;
         left: 19px;
         text-align: center;
-        font-family: NeuzeitGro Bol;
+        font-family: Neuzeit Gro Bol;
         width: 230px;
         height: 37px;
-    }
-
-    .pGoal {
-        color: white;
-        z-index: 1;
-        position: absolute;
-        height: 33px;
-        top: 43px;
-        object-fit: contain;
-        z-index: 1;
-        font-family: NeuzeitGro Bol;
-        font-size: 30px;
-        width: 20px;
-    }
-
-    .pGoal img {
-        position: absolute;
-        top: -6px;
-        left: 20px;
-        height: 140%;
-        width: 140%;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-    }
-        
-
-    .pAssist {
-        color: white;
-        z-index: 1;
-        position: absolute;
-        height: 33px;
-        top: 43px;
-        object-fit: contain;
-        z-index: 1;
-        font-family: NeuzeitGro Bol;
-        font-size: 30px;
-    }
-
-    .pAssist img {
-        position: absolute;
-        top: -6px;
-        left: 20px;
-        height: 140%;
-        width: 140%;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
-    }
-        
-
-    .pSave {
-        color: white;
-        z-index: 1;
-        position: absolute;
-        height: 33px;
-        top: 43px;
-        object-fit: contain;
-        z-index: 1;
-        font-family: NeuzeitGro Bol;
-        font-size: 30px;
-    }
-
-    .pSave img {
-        position: absolute;
-        top: -4px;
-        left: 20px;
-        height: 120%;
-        width: 120%;
-        object-fit: contain;
-        filter: brightness(0) invert(1);
+        top: -1px;
     }
 
     .flip {
@@ -216,6 +172,7 @@
         -o-transform: scale(-1, 1);
         -ms-transform: scale(-1, 1);
         transform: scale(-1, 1);
+        left:7px;
     }
         
         

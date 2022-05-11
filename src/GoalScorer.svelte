@@ -1,21 +1,22 @@
 <script>
     export let name;
-    export let speed;
     export let color;
     import { textfit } from 'svelte-textfit';
 	import { fade } from 'svelte/transition';
 </script>
-<div class='playerCard' style="bottom:100px; left:50px; border: {color} 2px solid; background-color:{color};" transition:fade="{{ duration: 500 }}">
+<img src='https://media.discordapp.net/attachments/827545087604162663/930824468081836102/NamePlate.png?width=1920&height=1080' alt='name' transition:fade="{{ duration: 500 }}">
+<div class='ext' style="background-color: {color};"></div>
+<div class='playerCard' style="bottom:100px; left:50px;" transition:fade="{{ duration: 500 }}">
     <div class='pName' use:textfit={
         {
           mode:"single", max:40,
           forceSingleModeWidth:false
         }
       }>
-        Scored By: {name}
+        {name}
     </div>
     <div class='pSpeed'>
-        {speed} KPH
+        Scored By: 
     </div>
 </div>
 
@@ -32,7 +33,13 @@
 	}
 
     * {
-        font-family: NeuzeitGro Bol
+        font-family: Neuzeit Gro Bol
+    }
+
+    img {
+        position: absolute;
+        top: 0%;
+        left: 0;
     }
 
     .playerCard{
@@ -44,23 +51,35 @@
     .pName {
         position: absolute;
         color: white;
-        top: 5px;
+        top: 133px;
         text-align: center;
-        font-family: NeuzeitGro Bol;
-        width: 100%;
+        font-family: Neuzeit Gro Bol;
+        font-size: 40px;
+        left:250px;
+        width: 450px;
+        height: 60px;
         z-index: 1;
-        height: 50%;
+        line-height: 60px;
     }
-
     .pSpeed {
         position: absolute;
         color: white;
-        top: 50%;
+        top: 133px;
         text-align: center;
-        font-family: NeuzeitGro Bol;
+        font-family: Neuzeit Gro Bol;
         font-size: 40px;
-        width: 100%;
+        width: 600px;
+        height: 60px;
+        left:-200px;
         z-index: 1;
+        line-height: 60px;
+    }
+
+    .ext {
+        height: 10px;
+        width: 750px;
+        position: absolute;
+        bottom: -2px;
     }
         
         
