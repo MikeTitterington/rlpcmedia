@@ -513,6 +513,54 @@ let teamMap = {
     "mages": {
       "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771077495772020751/Mages_Logo.png"
     },
+    "Pilots": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063046398279720/Pilots_Logo.png"
+    },
+    "Werewolves": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063068092137472/Werewolves_Logo.png"
+    },
+    "Wolverines": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063561769320478/Wolverines_Logo.png"
+    },
+    "Hurricanes": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063041957167134/Hurricanes_Logo.png"
+    },
+    "Koalas": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063714668347422/Koalas_Logo.png"
+    },
+    "Vikings": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063059607322674/Vikings_Logo.png"
+    },
+    "Fireflies": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063033735938138/Fireflies_logo.png"
+    },
+    "Comets": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063030410772571/Comets_Logo.png"
+    },
+    "Stingrays": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063054770634792/Stingrays_Logo.png"
+    },
+    "Hounds": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063037507403776/Hounds_Logo.png"
+    },
+    "Warthogs": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063064194842624/Warthogs_Logo.png"
+    },
+    "Gorillas": {
+      "logo": "https://cdn.discordapp.com/attachments/394574231066640387/730458225488691210/Gorillas_Logo.png"
+    },
+    "Coyotes": {
+      "logo": "https://cdn.discordapp.com/attachments/394574231066640387/717733513574744074/Coyotes_Logo.png"
+    },
+    "Harriers": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771078759486455857/Harriers_Logo.png"
+    },
+    "Puffins": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771063050143793222/Puffins_Logo.png"
+    },
+    "Witches": {
+      "logo": "https://cdn.discordapp.com/attachments/696962499177742476/771081662460985344/Witches_Logo.png"
+    },
     "turtles": {
       "1": "#ff2e00",
       "2": "#18020c",
